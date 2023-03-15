@@ -1,0 +1,36 @@
+CHANGES MADE:
+* Added `valueTransformFields` option and set a default of `['value']` to keep it all simple
+* Added `valueField` optional option for formats; when defined, the `.value` of each prop takes the value pointed to by `valueField` allowing you to use existing formats that aren't aware of multi-value tokens; 
+* Added an option to "valueField" formats so that "valueField" can be a string array; in that case, the value to use is looked up in original tokens by reading properties matching the names defined in "valueField", in the order they are defined. The first defined property's value is used.
+* Added an example using both new options to produce Android output with color and lang edge cases
+* Applying value transform to all value fields
+
+
+CHANGES TO MAKE:
+* Used `valueTransformFields` to decide on refs to resolve and to determine if an object is a prop, instead of just `.value`
+* Added a Tailwind example outputting multiple values from within the same format
+* Added a dedicated doc section showcasing strategies for multi-value tokens or for multiple renders of a token dictionary
+* Added UTs for new options and updated snapshots
+* Checked doc output to ensure new options are well documented in the API
+
+* vTF !== vF, because vF is about formats but we need to have transformed the values beforehand
+
+THIS RESULTS IN:
+* When the options are unset, identical behaviour (no breaking changes)
+* The ability to run formats with a specific set of values (useful for Android where you need to handle special cases in a file that's identical to your main case format but with a different file path)
+* The ability to run formats that have access to all values (useful for CSS in JS or CSS stacks where you want to use CSS selectors to apply a contextual value, like dark mode or lang-specific font families)
+
+
+Looking further in the future, if the W3C WG ends up creating a spec for "edge case values" like described on [TODO LINK](), the default value of `valueTransformFields` and/or the mechanisms that read this option could be changed to take the spec into account. Formats could be changed to be multi-value aware from the get go.
+
+-----
+
+There are two reasons that lead me to believe this is more versatile than the current approach (do multiple runs with multiple folders where tokens are all duplicated).
+
+Firstly, there are platforms like Android that require you to define only the tokens that differ from the norm. If only font-families change, you produce a new fonts.xml file with the appropriate definitions but you don't redefine colors or dimens.
+
+And there are other platforms where you want the opposite: you want a `theme.css` for your light theme, and another for your dark theme, and you'll then only load one.
+
+Issues arise when you need to generate to multiple platforms, some of which prefer only a diff, and some of which prefer full files. In that case, you can't create folder structures in your tokens that will match the desired output and allow you to use only transforms and formats.
+
+With the changes I'm proposing here, you can choose to run multi-value aware formats, or to run formats with only the different values, or formats that merge different values and "normal" values.

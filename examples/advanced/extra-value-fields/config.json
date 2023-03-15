@@ -1,0 +1,44 @@
+{
+  "source": ["tokens/**/*.json"],
+  "platforms": {
+    "android": {
+      "transformGroup": "android",
+      "buildPath": "android/src/main/res/",
+      "valueTransformFields": [
+        "value",
+        "value_dark",
+        "value_lang-ja"
+      ],
+      "files": [
+        {
+          "destination": "values/colors.xml",
+          "format": "android/colors"
+        },
+        {
+          "destination": "values-dark-only/colors.xml",
+          "format": "android/colors",
+          "valueField": "value_dark"
+        },
+        {
+          "destination": "values-dark-or-light/colors.xml",
+          "format": "android/colors",
+          "valueField": ["value_dark", "value"]
+        },
+        {
+          "destination": "values/font_dimens.xml",
+          "format": "android/fontDimens"
+        },
+        {
+          "destination": "values-ja/font_dimens.xml",
+          "format": "android/fontDimens",
+          "valueField": "value_lang-ja"
+        },
+        {
+          "destination": "values-ko/font_dimens.xml",
+          "format": "android/fontDimens",
+          "valueField": "value_lang-ko"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Do not edit directly
+  Generated on Tue, 14 Mar 2023 15:03:00 GMT
+-->
+<resources>
+  <color name="color_base_gray_light">#ff333333</color>
+  <color name="color_base_gray_medium">#ff666666</color>
+  <color name="color_base_gray_dark">#ffeeeeee</color>
+  <color name="color_base_red">#ffff0000</color>
+  <color name="color_base_green">#ff00ff00</color>
+  
+</resources>

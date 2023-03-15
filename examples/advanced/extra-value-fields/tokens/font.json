@@ -1,0 +1,24 @@
+{
+  "size": {
+    "font": {
+      "small": {
+        "value": "0.75",
+        "group": "typography"
+      },
+      "medium": {
+        "value": "1.5",
+        "value_lang-ko": "1.4",
+        "group": "typography"
+      },
+      "large": {
+        "value": "2",
+        "value_lang-ko": "1.8",
+        "group": "typography"
+      },
+      "base": {
+        "value": "1",
+        "group": "typography"
+      }
+    }
+  }
+}
